@@ -3,7 +3,7 @@
 class: CommandLineTool
 
 description: |
-  ***********************************************************************
+Output summary statistics per reference for a SAM/BAM file (Aligned reads only).
 
 dct:creator:
   foaf:name: Andy Yang
