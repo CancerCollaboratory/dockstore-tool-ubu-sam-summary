@@ -36,7 +36,7 @@ outputs:
       glob: $(inputs.out)
 
     doc: Output summary file
-baseCommand: [java, -jar, /opt/ubu/ubu.jar, sam-filter]
+baseCommand: [java, -jar, /opt/ubu/ubu.jar, sam-summary]
 doc: |
   Output summary statistics per reference for a SAM/BAM file (Aligned reads only).
 
