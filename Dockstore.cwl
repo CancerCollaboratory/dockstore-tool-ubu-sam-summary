@@ -9,10 +9,11 @@ dct:creator:
   foaf:name: Andy Yang
   foaf:mbox: "mailto:ayang@oicr.on.ca"
 
+cwlVersion: draft-3
+
 requirements:
   - class: DockerRequirement
     dockerPull: "quay.io/cancercollaboratory/dockstore-tool-ubu-sam-summary"
-  - { import: node-engine.cwl }
 
 inputs:
   - id: "#in"
@@ -20,20 +21,27 @@ inputs:
     description: "Input sam or bam file"
     inputBinding:
       position: 1
+      prefix: "--in"
 
   - id: "#header"
-    type: File
+    type: [ "null", File ]
     description: "Output header"
     inputBinding:
       position: 2
+      prefix: "--header"
+
+  - id: "#out"
+    type: string 
+    description: "Output summary file"
+    inputBinding:
+      position:  3 
+      prefix: "--out"
 
 outputs:
   - id: "#out"
     type: File
     description: "Output summary file"
     outputBinding:
-      glob:
-        engine: cwl:JsonPointer
-        script: /job/output1
+      glob: $(inputs.out)
 
-baseCommand: ["sam-filter"]
+baseCommand: ["java" , "-jar" , "/opt/ubu/ubu.jar" , "sam-filter"]
