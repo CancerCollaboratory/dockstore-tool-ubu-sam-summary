@@ -44,4 +44,4 @@ outputs:
     outputBinding:
       glob: $(inputs.out)
 
-baseCommand: ["java" , "-jar" , "/opt/ubu/ubu.jar" , "sam-filter"]
+baseCommand: ["java" , "-jar" , "/opt/ubu/ubu.jar" , "sam-summary"]
