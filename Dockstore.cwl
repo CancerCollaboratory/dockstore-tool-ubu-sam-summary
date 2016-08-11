@@ -2,46 +2,41 @@
 
 class: CommandLineTool
 
-description: | 
-  Output summary statistics per reference for a SAM/BAM file (Aligned reads only).
-
 dct:creator:
   foaf:name: Andy Yang
-  foaf:mbox: "mailto:ayang@oicr.on.ca"
-
-cwlVersion: draft-3
+  foaf:mbox: mailto:ayang@oicr.on.ca
+cwlVersion: v1.0
 
 requirements:
-  - class: DockerRequirement
-    dockerPull: "quay.io/cancercollaboratory/dockstore-tool-ubu-sam-summary"
-
+- class: DockerRequirement
+  dockerPull: quay.io/cancercollaboratory/dockstore-tool-ubu-sam-summary
 inputs:
-  - id: "#in"
-    type: File
-    description: "Input sam or bam file"
-    inputBinding:
-      position: 1
-      prefix: "--in"
-
-  - id: "#header"
-    type: [ "null", File ]
-    description: "Output header"
+  header:
+    type: File?
     inputBinding:
       position: 2
-      prefix: "--header"
-
-  - id: "#out"
-    type: string 
-    description: "Output summary file"
+      prefix: --header
+    doc: Output header
+  out:
+    type: string
     inputBinding:
-      position:  3 
-      prefix: "--out"
-
-outputs:
-  - id: "#out"
+      position: 3
+      prefix: --out
+    doc: Output summary file
+  in:
     type: File
-    description: "Output summary file"
+    inputBinding:
+      position: 1
+      prefix: --in
+    doc: Input sam or bam file
+outputs:
+  out:
+    type: File
     outputBinding:
       glob: $(inputs.out)
 
-baseCommand: ["java" , "-jar" , "/opt/ubu/ubu.jar" , "sam-filter"]
+    doc: Output summary file
+baseCommand: [java, -jar, /opt/ubu/ubu.jar, sam-filter]
+doc: |
+  Output summary statistics per reference for a SAM/BAM file (Aligned reads only).
+
